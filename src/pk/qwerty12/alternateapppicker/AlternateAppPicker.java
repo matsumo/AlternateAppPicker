@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
-import android.widget.GridView;
+import android.widget.ListView;
 import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -72,12 +72,12 @@ public class AlternateAppPicker implements IXposedHookZygoteInit {
 							final CheckBox mAlwaysCheckBox = (CheckBox) buttonLayout.getChildAt(0);
 
 							/* Since my hook below causes a crash, just reimplement the listener here, which will work with the checkbox rather than relying upon the buttons, instead of trying to play nice with the original method. */
-							final GridView mGrid = (GridView) XposedHelpers.getObjectField(param.thisObject, "mGrid");
+							final ListView mGrid = (ListView) XposedHelpers.getObjectField(param.thisObject, "mGrid");
 							mGrid.setOnItemClickListener(new OnItemClickListener() {
 							      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 							          if (XposedHelpers.getBooleanField(param.thisObject, "mAlwaysUseOption")) {
 							              final int checkedPos = mGrid.getCheckedItemPosition();
-							              final boolean enabled = checkedPos != GridView.INVALID_POSITION;
+							              final boolean enabled = checkedPos != ListView.INVALID_POSITION;
 							              if (enabled) {
 							            	  XposedHelpers.callMethod(param.thisObject, "startSelected", position, mAlwaysCheckBox.isChecked());
 							              }

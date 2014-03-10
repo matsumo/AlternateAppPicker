@@ -29,16 +29,10 @@
     <FrameLayout android:layout_width="match_parent"
                  android:layout_height="0dip"
                  android:layout_weight="1">
-        <GridView
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+        <ListView
             android:id="@+id/resolver_grid"
-            android:numColumns="4"
-            android:columnWidth="128dp"
-            android:padding="16dp"
-            android:clipToPadding="false"
-            android:scrollbarStyle="outsideOverlay" />
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
     </FrameLayout>
     <LinearLayout
         android:id="@+id/button_bar"
